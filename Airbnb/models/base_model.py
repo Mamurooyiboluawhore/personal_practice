@@ -5,7 +5,13 @@ import uuid
 #a base class that defines all common attributes
 class BaseModel():
 #initializing
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+#checkin if kwargs is empty
+        if kwargs
+#deleting the key named class with the for loop
+	    for key, value in kwargs.items
+	        if key == "__class__":
+		    continue:
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
