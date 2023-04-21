@@ -1,25 +1,27 @@
 #!/usr/bin/python3
 from datetime import datetime
+import models
 import uuid
 
 # a base class that defines all common attributes
 class BaseModel():
 # initializing
     def __init__(self, *args, **kwargs):
-# checkin if kwargs is empty
-        if (kwargs):
+# checking if kwargs is empty
+        if len(kwargs) != 0:
 # deleting the key named class with the for loop
             for key, value in kwargs.items():
-                if key == "__class__":
-                    continue
-                elif key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.fromisoformat(value)
+               # if key == "__class__":
+                 #   continue;
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.fromisoformat(value);
                 else:
-                    self.__dict__[key] = value
+                    self.__dict__[key] = value;
         else:    
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
    
     def __str__(self):
@@ -28,7 +30,7 @@ class BaseModel():
     
     def save(self):
         self.updated_at = datetime.now()
-
+        models.storage.save()
 # makes a copy of a dictionary
 
     def to_dict(self):
