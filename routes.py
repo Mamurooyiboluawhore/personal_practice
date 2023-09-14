@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, request, jsonify
-from model import db
+from model import db, User, Doctor
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///med.db'
