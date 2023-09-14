@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, request, jsonify
-from database import db
+from model import db
 
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///med.db'
+db.init_app(app)
 
 app = Flask(__name__)
 users = {
@@ -85,6 +88,11 @@ def book_appointment():
         return jsonify({'message': 'Booking appointment failed'}), 400
 
 
+@app.route('/appointment/<int>: id', methods=['POST'])
+def update_appointment(appointment_id)
+    pass
+
+@app.route('/appointment/<int>: id')
 @app.route('/payment', methods=['POST', 'GET'])
 def payment():
     if request.method == 'POST':
@@ -161,5 +169,6 @@ def delete_post(post.id)
 
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(debug=True)
+    with app.app_context():
+        db.create_all()
+        app.run(debug=True)
